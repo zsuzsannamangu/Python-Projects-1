@@ -8,13 +8,12 @@ class Car:
 
     #we give two methods to the Car class:
     def information(self):
-        msg = "\nmake: {}\nmodel: {}\nid_number: {}\npowertype:".format(self.make,self.model,self.id_number,self.powertype)
+        msg = "\nmake: {}\nmodel: {}\nid_number: {}\npowertype: {}".format(self.make,self.model,self.id_number,self.powertype)
         return msg
 
     def owner(self):
         owner_name = input("Enter your name: ")
-        print("Hello {}, your {} {} car is cool.".format(owner_name,self.make,self.model))
-        
+        return("Hello {}, your {} {} car is cool.".format(owner_name,self.make,self.model))
 
 #child class instance #1
 class Full_hybrid(Car):
@@ -22,6 +21,8 @@ class Full_hybrid(Car):
     model = "Prius"
     id_number = "1234KF"
     powertype = "hybrid"
+    color = "blue"
+    fun = True
 
     def source(self):
         msg = "\nFull hybrid vehicles can run on the internal combustion engine alone, the electric motors alone, or a combination of both."
@@ -33,6 +34,8 @@ class Mild_hybrid(Car):
     model = "Ram"
     id_number = "2829KB"
     powertype = "hybrid"
+    doors = 4
+    carseats = True
 
     def source(self):
         msg = "\nMild hybrid vehicles cannot run solely on either its internal combustion engine or its electric motors. "
@@ -42,7 +45,7 @@ class Mild_hybrid(Car):
     def owner(self):
         owner_name = input("Enter your name: ")
         owner_phone = input("Enter your number: ")
-        print("Hello {}, your {} {} car is cool.".format(owner_name,self.make,self.model))
+        return("Hello {}, your {} {} car is cool.".format(owner_name,self.make,self.model))
 
 #child class instance #3
 class Plugin_hybrid(Car):
@@ -59,9 +62,9 @@ class Plugin_hybrid(Car):
     def owner(self):
         owner_question = input("Do you like this car? ")
         if (owner_question == "yes"):
-            print ("Great.")
+            return ("Great.")
         else:
-            print("Sorry to hear that.")
+            return("Sorry to hear that.")
 
 #instantiate all the above class objects:
     
