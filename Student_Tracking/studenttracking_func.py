@@ -123,7 +123,7 @@ def addToList(self):
     if not "@" or not "." in var_email: #will use this soon
           print("Incorrect email format")
           #if any of these are empty we are giving an error msg to the user, bc they didn't fill out the fields
-    if (len(var_fname) > 0) and (len(var_lname) > 0) and (len(var_phone) > 0) and (len(var_email) > 0) and (len(var_currentcourse > 0)):
+    if (len(var_fname) > 0) and (len(var_lname) > 0) and (len(var_phone) > 0) and (len(var_email) > 0) and (len(var_currentcourse) > 0):
         conn = sqlite3.connect('db_phonebook.db')
         with conn:
             cursor = conn.cursor()

@@ -42,10 +42,11 @@ import studenttracking_func
 # self = it's like the address to get to the ParentWindow class = ParentWindow
 # self.master = the ParentWindow Frame
 
+
 class ParentWindow(Frame):
     def __init__(self, master, *args, **kwargs):
         Frame.__init__(self, master, *args, **kwargs)
-
+        
         #define the master frame configuration:
         self.master = master
         self.master.minsize(500,300) #this is how big the window will be that holds our form
@@ -76,20 +77,32 @@ class ParentWindow(Frame):
         #options can be used as key-value pairs separated by commas, ex: (master, bg, Font, Image...etc)
         menubar = Menu(self.master)
         filemenu = Menu(menubar, tearoff = 0)
+        
         #tearoff menu = a menu that can be made into a window and moved to another portion of the screen
         #setting tearoff = 0: the menu will not have a tear-off feature
         filemenu.add_separator()
+
+
+        
         #add_separator(): Adds a separator line to the menu.
         filemenu.add_command(label="Exit", underline=1, accelerator="Ctrl+Q",command=lambda: studenttracking_func.ask_quit(self))
+        
         #add_command(options): Adds a menu item to the menu.
         menubar.add_cascade(label="File", underline=0, menu=filemenu)
+        
         #add_cascade(options): Creates a new hierarchical menu by associating a given menu to a parent menu.
+        
         helpmenu = Menu(menubar, tearoff = 0) # defines the particular drop down colum and tearoff=0 means do not separate from menubar
+        
         helpmenu.add_separator()
+        
         helpmenu.add_command(label="How to use this program")
+        
         helpmenu.add_separator()
+        
         helpmenu.add_command(label="About")# add_command is a child menubar item of the add_cascade parent item
-        helpmenu.add_cascade(label="Help", menu=helpmenu) # add_cascade is a parent menubar item (visible heading)
+
+        menubar.add_cascade(label="Help", menu=helpmenu) # add_cascade is a parent menubar item (visible heading)
 
         
         #Finally, we apply the config method of the widget to display the menu:
