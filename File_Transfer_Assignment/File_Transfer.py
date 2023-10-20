@@ -7,12 +7,6 @@
 # Purpose:  This is a program that can move files from one folder
 #           to another with a click of a button.
 #
-# Steps:    1. Create GUI - the interface for users to transfer files
-#           2.
-#           3.
-
-
-# 1. Create GUI:
 
 import tkinter as tk
 from tkinter import *
@@ -31,9 +25,8 @@ def CheckTime():
     
     #get the current time
     current_time = time.strftime("%Y-%m-%d %H:%M:%S")
-    #print("Current time: ",current_time)
-    #print(type(current_time))
 
+    #change type of current_time into datetime object
     current_time_do = datetime.strptime(current_time, "%Y-%m-%d %H:%M:%S")
     print("Current time: ",current_time_do)
     print(type(current_time_do))
@@ -41,23 +34,21 @@ def CheckTime():
     #get the timestamp of the file
     path = "/Users/zsuzsi/Documents/GitHub/Python-Projects/Python-Projects/File_Transfer_Assignment/Customer_Source"
     modification_time = os.path.getmtime(path)
-
+    #change the modification_time that is in seconds to local time
     local_time_ofmodification = time.ctime(modification_time)
-    #print("Last modification time(Local time):", local_time_ofmodification)
-    #print(type(local_time_ofmodification))
-
+    #change type of current_time into datetime object
     local_time_ofmodification_do = datetime.strptime(local_time_ofmodification, "%a %b %d %H:%M:%S %Y")
     print("Modification time: ",local_time_ofmodification_do)
     print(type(local_time_ofmodification_do))
 
-    #if the difference between current time and modification time is larger than 24 hours, true
-    #else false
-
+    #calculate the difference between current time and modification time in hours
     diff_in_hours = (current_time_do - local_time_ofmodification_do).total_seconds() / 3600
     print ('{} - {} = {} hours'.format(current_time_do, local_time_ofmodification_do, diff_in_hours))
 
+    #if the difference in hours is less than 24 hours, print "There are new files".
+    #else print "There are no new files."
     def within_24hours():
-        if diff_in_hours < 1:
+        if diff_in_hours < 24:
             print ("There are new files.")
         else:
             print ("There are no new files.")
