@@ -19,7 +19,7 @@ import shutil
 
 import time
 import datetime
-from datetime import datetime
+from datetime import timedelta
 
 class ParentWindow(Frame):
     def __init__(self, master):
@@ -91,24 +91,28 @@ class ParentWindow(Frame):
         
         for i in source_files:
             #get the current time
-            current_time = time.strftime("%Y-%m-%d %H:%M:%S")
+            #current_time = time.strftime("%Y-%m-%d %H:%M:%S")
             #change type of current_time into datetime object
-            current_time_do = datetime.strptime(current_time, "%Y-%m-%d %H:%M:%S")
+            #current_time_do = datetime.strptime(current_time, "%Y-%m-%d %H:%M:%S")
 
             #get the timestamp of the file
             path = os.path.join(source, i)
             modification_time = os.path.getmtime(path)
             #change the modification_time that is in seconds to local time
-            local_time_ofmodification = time.ctime(modification_time)
+            #local_time_ofmodification = time.ctime(modification_time)
+
+            hours_24 = datetime.datetime.now() - timedelta(hours = 24)
+            date_time_file = datetime.datetime.fromtimestamp(modification_time)
+            
             #change type of current_time into datetime object
-            local_time_ofmodification_do = datetime.strptime(local_time_ofmodification, "%a %b %d %H:%M:%S %Y")
+            #local_time_ofmodification_do = datetime.strptime(local_time_ofmodification, "%a %b %d %H:%M:%S %Y")
 
             #calculate the difference between current time and modification time in hours
-            diff_in_hours = (current_time_do - local_time_ofmodification_do).total_seconds() / 3600
-            print ('{} - {} = {} hours'.format(current_time_do, local_time_ofmodification_do, diff_in_hours))
+            #diff_in_hours = (current_time_do - local_time_ofmodification_do).total_seconds() / 3600
+            #print ('{} - {} = {} hours'.format(current_time_do, local_time_ofmodification_do, diff_in_hours))
 
             #if the difference in hours is less than 24 hours, move the file(s)
-            if diff_in_hours < 24:
+            if hours_24 < date_time_file:
                 #moves each file from the source to the destination:
                 shutil.move(source + '/' + i, destination)
                 print(i + ' was successfully transferred.')
