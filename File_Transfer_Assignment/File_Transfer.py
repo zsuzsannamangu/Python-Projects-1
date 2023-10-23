@@ -90,28 +90,33 @@ class ParentWindow(Frame):
         #Runs through each file in the source directory
         
         for i in source_files:
-            #get the current time
-            #current_time = time.strftime("%Y-%m-%d %H:%M:%S")
-            #change type of current_time into datetime object
-            #current_time_do = datetime.strptime(current_time, "%Y-%m-%d %H:%M:%S")
 
-            #get the timestamp of the file
+            #get the timestamp of the file:
             path = os.path.join(source, i)
+
+            #get the time of last modification of the path with the getmtime() function
+            #the return value is a floating point number giving the number of seconds since the epoch (Jan 1, 1970, 00:00:00 UTC)
             modification_time = os.path.getmtime(path)
-            #change the modification_time that is in seconds to local time
-            #local_time_ofmodification = time.ctime(modification_time)
+
+            #A timedelta object represents a duration, the difference between two dates or times
+            #Here we use hours=24, but it can be minutes = ..., days=... etc.
+
+            #we substract 24 hours from the current date+time
+            hours_24 = datetime.datetime.now() - timedelta(hours = 24)
+
+            """time = datetime.datetime.now()
+            returns this format: 2023-10-23 13:43:26.007725
+
+            timedelta = timedelta(hours=24)
+            returns this format: 1 day, 0:00:00
 
             hours_24 = datetime.datetime.now() - timedelta(hours = 24)
+            returns this format: 2023-10-22 13:43:26.442720"""
+
+            #we convert the timestamp we got into a date object with the fromtimestamp() function
             date_time_file = datetime.datetime.fromtimestamp(modification_time)
-            
-            #change type of current_time into datetime object
-            #local_time_ofmodification_do = datetime.strptime(local_time_ofmodification, "%a %b %d %H:%M:%S %Y")
 
-            #calculate the difference between current time and modification time in hours
-            #diff_in_hours = (current_time_do - local_time_ofmodification_do).total_seconds() / 3600
-            #print ('{} - {} = {} hours'.format(current_time_do, local_time_ofmodification_do, diff_in_hours))
-
-            #if the difference in hours is less than 24 hours, move the file(s)
+            #if the difference in hours is less than 24 hours, move the file(s):
             if hours_24 < date_time_file:
                 #moves each file from the source to the destination:
                 shutil.move(source + '/' + i, destination)
