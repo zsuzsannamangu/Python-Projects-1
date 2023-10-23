@@ -21,43 +21,6 @@ import time
 import datetime
 from datetime import datetime
 
-def CheckTime():
-    
-    #get the current time
-    current_time = time.strftime("%Y-%m-%d %H:%M:%S")
-
-    #change type of current_time into datetime object
-    current_time_do = datetime.strptime(current_time, "%Y-%m-%d %H:%M:%S")
-    print("Current time: ",current_time_do)
-    print(type(current_time_do))
-
-    #get the timestamp of the file
-    path = "/Users/zsuzsi/Documents/GitHub/Python-Projects/Python-Projects/File_Transfer_Assignment/Customer_Source"
-    modification_time = os.path.getmtime(path)
-    #change the modification_time that is in seconds to local time
-    local_time_ofmodification = time.ctime(modification_time)
-    #change type of current_time into datetime object
-    local_time_ofmodification_do = datetime.strptime(local_time_ofmodification, "%a %b %d %H:%M:%S %Y")
-    print("Modification time: ",local_time_ofmodification_do)
-    print(type(local_time_ofmodification_do))
-
-    #calculate the difference between current time and modification time in hours
-    diff_in_hours = (current_time_do - local_time_ofmodification_do).total_seconds() / 3600
-    print ('{} - {} = {} hours'.format(current_time_do, local_time_ofmodification_do, diff_in_hours))
-
-    #if the difference in hours is less than 24 hours, print "There are new files".
-    #else print "There are no new files."
-    def within_24hours():
-        if diff_in_hours < 24:
-            print ("There are new files.")
-        else:
-            print ("There are no new files.")
-
-    within_24hours()
-    
-CheckTime()
-
-
 class ParentWindow(Frame):
     def __init__(self, master):
         Frame.__init__(self)
@@ -133,7 +96,7 @@ class ParentWindow(Frame):
             current_time_do = datetime.strptime(current_time, "%Y-%m-%d %H:%M:%S")
 
             #get the timestamp of the file
-            path = "/Users/zsuzsi/Documents/GitHub/Python-Projects/Python-Projects/File_Transfer_Assignment/Customer_Source"
+            path = os.path.join(source, i)
             modification_time = os.path.getmtime(path)
             #change the modification_time that is in seconds to local time
             local_time_ofmodification = time.ctime(modification_time)
