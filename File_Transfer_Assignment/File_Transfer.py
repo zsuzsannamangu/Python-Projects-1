@@ -122,7 +122,7 @@ class ParentWindow(Frame):
                 shutil.move(source + '/' + i, destination)
                 print(i + ' was successfully transferred.')
             else:
-                print("There are no new files.")
+                print("There are no new files here.")
 
     #Creates function to exit program
     def exit_program(self):
